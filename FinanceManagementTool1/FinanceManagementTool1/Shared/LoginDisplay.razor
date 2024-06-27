@@ -1,0 +1,30 @@
+﻿<AuthorizeView>
+    <Authorized>
+        <a href="Identity/Account/Manage" class="rz-color-white">Hello, @context.User.Identity?.Name!</a>
+        <form method="post" action="Identity/Account/LogOut">
+            <button type="submit" class="nav-link btn btn-link rz-color-white">Log out</button>
+        </form>
+    </Authorized>
+    <NotAuthorized>
+        @* <a href="Identity/Account/Register">Register</a> *@
+        
+        @* <RadzenButton Click=@(args => OnClick("Identity/Account/Login")) Text="Logino" ButtonStyle="ButtonStyle.Primary" />
+        <RadzenButton Text="Login">
+            
+            <RadzenLink Path="Identity/Account/Login" Text="Log in" />
+            <a href="Identity/Account/Login" class="rz-color-white">Log in</a>
+        </RadzenButton> *@
+        <a href="Identity/Account/Login" class="rz-color-white">Log in</a>
+    </NotAuthorized>
+</AuthorizeView>
+ 
+
+@code {
+    private void OnClick(string text)
+    {
+        string url = text;
+
+       
+
+    }
+}

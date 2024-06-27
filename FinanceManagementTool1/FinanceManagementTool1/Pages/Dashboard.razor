@@ -1,0 +1,25 @@
+﻿@page "/dashboard"
+
+@using FinanceManagementTool1.Data
+
+<PageTitle>Dashboard</PageTitle>
+
+<div class="rz-m-8">
+    <RadzenBreadCrumb>
+        <RadzenBreadCrumbItem Path="/" Text="Home" />
+        <RadzenBreadCrumbItem Text="Dashboard" />
+    </RadzenBreadCrumb>
+</div>
+
+<h1>Dashboard</h1>
+
+<RadzenTabs @bind-SelectedIndex=@selectedIndex >
+    <Tabs>
+        <RadzenTabsItem Text="Einnahmen">
+            - Diagramm 1
+        </RadzenTabsItem>
+        <RadzenTabsItem Text="Ausgaben">
+            - Diagramm 2
+        </RadzenTabsItem>
+    </Tabs>
+</RadzenTabs>

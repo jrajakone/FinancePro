@@ -1,0 +1,66 @@
+﻿@page "/currencyexchange"
+
+@using FinanceManagementTool1.Data
+@inject CurrencyService CurrencyService
+@inject NotificationService NotificationService
+
+<PageTitle>Currency Exchange</PageTitle>
+
+<div class="rz-m-8">
+	<RadzenBreadCrumb>
+		<RadzenBreadCrumbItem Path="/" Text="Home" />
+		<RadzenBreadCrumbItem Text="Currency Exchange" />
+	</RadzenBreadCrumb>
+</div>
+
+<h1>Currency Exchange</h1>
+
+<div class="rz-border-info rz-mt-6 rz-background-color-info-lighter rz-p-3">
+	<RadzenRow class="rz-text-align-center" Gap="0rem">
+		<RadzenColumn class="rz-color-on-info-lighter">
+			<div class="rz-p-sm-12 rz-text-align-center">
+				<RadzenLabel id="DropDownEditLabel" Text="From:" Component="DropDownEdit" Style="margin-right: 8px; vertical-align: middle;" />
+				<RadzenDropDown @bind-Value=@baseCurrency Placeholder="Select" Data=@currencyTypes Style="width: 100%; max-width: 300px;" Name="DropDownEdit">
+					<ValueTemplate>
+						<RadzenTextBox @bind-Value=@baseCurrency Style="width:120%;height:120%;margin:-15px" aria-labelledby="DropDownEditLabel" />
+					</ValueTemplate>
+				</RadzenDropDown>
+			</div>
+
+			<div class="rz-p-0 rz-text-align-center">
+				<RadzenNumeric ShowUpDown="false" TValue="double?" @bind-Value=@eingabe Placeholder="Enter amount" InputAttributes="@(new Dictionary<string,object>(){ { "aria-label", "enter value" }})" />
+			</div>
+
+		</RadzenColumn>
+
+		<RadzenColumn class="rz-color-on-info-lighter">
+			<div class="rz-p-sm-12 rz-text-align-center">
+				<RadzenLabel id="DropDownEditLabel" Text="To:" Component="DropDownEdit" Style="margin-right: 8px; vertical-align: middle;" />
+				<RadzenDropDown @bind-Value=@targetCurrency Placeholder="Select" Data=@currencyTypes Style="width: 100%; max-width: 300px;" Name="DropDownEdit">
+					<ValueTemplate>
+						<RadzenTextBox @bind-Value=@targetCurrency Style="width:120%;height:120%;margin:-15px" aria-labelledby="DropDownEditLabel" />
+					</ValueTemplate>
+				</RadzenDropDown>
+			</div>
+		</RadzenColumn>
+	</RadzenRow>
+
+	<RadzenRow>
+		<RadzenColumn class="rz-color-on-info-lighter">
+			<RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="1rem" Wrap="FlexWrap.Wrap">
+				<RadzenButton Click=@(args => GetExchangeRate()) Text="Request" ButtonStyle="ButtonStyle.Primary" />
+				<p>
+					Exchange rate: <b>@exchangeRate</b>
+					<br>
+					Target Currency: <b>@zielwaehrung</b>
+					@targetCurrency
+				</p>
+			</RadzenStack>
+		</RadzenColumn>
+	</RadzenRow>
+</div>
+
+
+
+
+
