@@ -12,7 +12,7 @@ namespace FinanceManagementTool1.Data
 			
         }
 
-		public DbSet<AddData> addDatas { get; set; }
+		public DbSet<AddData> Ausgaben { get; set; }
 	}
 
 
