@@ -1,0 +1,62 @@
+﻿@* @page "/add-transaction"
+
+@using FinanceManagementTool1.Data
+@using FinanceManagementTool1.Models
+@inject ApplicationDbContext _context
+@inject NavigationManager Navigation
+
+<h3>Neue Transaktion hinzufügen</h3>
+
+<EditForm Model="@addData" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div>
+        <label for="date">Datum:</label>
+        <InputDate id="date" @bind-Value="addData.Date" />
+    </div>
+
+    <div>
+        <label for="amount">Betrag:</label>
+        <InputNumber id="amount" @bind-Value="addData.Amount" />
+    </div>
+
+    <div>
+        <label for="description">Beschreibung:</label>
+        <InputText id="description" @bind-Value="addData.Description" />
+    </div>
+
+    <div>
+        <label for="category">Kategorie:</label>
+        <InputText id="category" @bind-Value="addData.Category" />
+    </div>
+
+    <button type="submit">Speichern</button>
+</EditForm>
+
+@code {
+    private AddData addData = new AddData();
+
+    private async Task HandleValidSubmit()
+    {
+        if (_context != null)
+        {
+            _context.AddData.Add(addData);
+            await _context.SaveChangesAsync();
+        }
+        else
+        {
+            Console.WriteLine("_context ist null");
+        }
+
+        if (Navigation != null)
+        {
+            Navigation.NavigateTo("/dashboard");
+        }
+        else
+        {
+            Console.WriteLine("Navigation ist null");
+        }
+    }
+} *@
+

@@ -24,6 +24,8 @@ builder.Services.AddScoped<HttpClient>();
 builder.Services.AddScoped<CurrencyService>();
 builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 builder.Services.AddRadzenComponents();
+// builder.Services.AddSingleton<NavigationManager>();
+
 //builder.Services.AddSingleton<ApplicationDbContext>();
 
 var app = builder.Build();

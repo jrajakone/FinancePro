@@ -1,14 +1,12 @@
 ﻿<RadzenLayout style="position:relative">
     <RadzenHeader class="rz-background-color-info-light rz-pt-4 rz-pl-4 p-1">
         <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Style="text-align:center">
-			@* <RadzenSidebarToggle Click="@(() => sidebarExpanded = !sidebarExpanded)" /> *@
             <h5>Finance Pro</h5>
 		</RadzenStack>
 	</RadzenHeader>
 
     <RadzenSidebar Responsive="false" style="position: relative" class="rz-background-color-base-300">
         <RadzenPanelMenu class="rz-background-color-base-300">
-			@* <RadzenPanelMenuItem Text="Home" Icon="home" /> *@
 			<AuthorizeView>
 				<Authorized>
 					<div class="nav-item px-3">
@@ -21,14 +19,19 @@
 							<RadzenIcon Icon="dashboard" class="rz-color-base-900 rz-mr-2" aria-hidden="true" /> <span class="rz-color-base-900">Dashboard</span>
 						</NavLink>
 					</div>
-					<div class="nav-item px-3">
-                        <NavLink class="nav-link rz-color-primary rz-ripple rz-text-align-center rz-p-5" href="standarduser">
+@* 					<div class="nav-item px-3">
+                        <NavLink class="nav-link rz-color-primary rz-ripple rz-text-align-center rz-p-5" href="settings">
 							<RadzenIcon Icon="settings" class="rz-color-base-900 rz-mr-2" aria-hidden="true" /> <span class="rz-color-base-900">Settings</span>
 						</NavLink>
+					</div> *@
+					<div class="nav-item px-3">
+						<NavLink class="nav-link rz-color-primary rz-ripple rz-text-align-center rz-p-5" href="add-transaction">
+							<RadzenIcon Icon="note_add" class="rz-color-base-900 rz-mr-2" aria-hidden="true" /> <span class="rz-color-base-900">Add Transaktion</span>
+						</NavLink>
 					</div>
+
 				</Authorized>
 			</AuthorizeView>
-			@*  <RadzenPanelMenuItem Text="Users" Icon="account_box" /> *@
 		</RadzenPanelMenu>
 	</RadzenSidebar>
 </RadzenLayout>

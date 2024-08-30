@@ -1,6 +1,10 @@
 ﻿@page "/dashboard"
 
 @using FinanceManagementTool1.Data
+@using FinanceManagementTool1.Models
+@inject ApplicationDbContext _context
+@inject NavigationManager Navigation
+
 
 <PageTitle>Dashboard</PageTitle>
 
@@ -13,13 +17,54 @@
 
 <h1>Dashboard</h1>
 
-<RadzenTabs @bind-SelectedIndex=@selectedIndex >
+<div class="rz-mb-4">
+    <RadzenButton Text="Neue Transaktion hinzufügen" Icon="add" Click="OnAddTransactionClick" />
+</div>
+
+<RadzenTabs @bind-SelectedIndex=@selectedIndex>
     <Tabs>
         <RadzenTabsItem Text="Einnahmen">
-            - Diagramm 1
+            <!-- Daten und Diagramm für Einnahmen -->
+            <RadzenDataGrid Data="@incomeData" TItem="AddData">
+                <Columns>
+                    <RadzenDataGridColumn TItem="AddData" Property="Date" Title="Datum" />
+                    <RadzenDataGridColumn TItem="AddData" Property="Amount" Title="Betrag" />
+                    <RadzenDataGridColumn TItem="AddData" Property="Description" Title="Beschreibung" />
+                    <RadzenDataGridColumn TItem="AddData" Property="Category" Title="Kategorie" />
+                    <RadzenDataGridColumn TItem="AddData" Title="Aktionen">
+                        <Template Context="data">
+                            <RadzenButton Icon="delete" Style="margin-right: 5px" ButtonStyle="ButtonStyle.Danger" Size="ButtonSize.Small" Click="@(args => OnDeleteTransactionClick(data.Id))" />
+                        </Template>
+                    </RadzenDataGridColumn>
+                </Columns>
+            </RadzenDataGrid>
         </RadzenTabsItem>
         <RadzenTabsItem Text="Ausgaben">
-            - Diagramm 2
+            <!-- Daten und Diagramm für Ausgaben -->
+            <RadzenDataGrid Data="@expenseData" TItem="AddData">
+                <Columns>
+                    <RadzenDataGridColumn TItem="AddData" Property="Date" Title="Datum" />
+                    <RadzenDataGridColumn TItem="AddData" Property="Amount" Title="Betrag" />
+                    <RadzenDataGridColumn TItem="AddData" Property="Description" Title="Beschreibung" />
+                    <RadzenDataGridColumn TItem="AddData" Property="Category" Title="Kategorie" />
+                    <RadzenDataGridColumn TItem="AddData" Title="Aktionen">
+                        <Template Context="data">
+                            <RadzenButton Icon="delete" Style="margin-right: 5px" ButtonStyle="ButtonStyle.Danger" Size="ButtonSize.Small" Click="@(args => OnDeleteTransactionClick(data.Id))" />
+                        </Template>
+                    </RadzenDataGridColumn>
+                </Columns>
+            </RadzenDataGrid>
         </RadzenTabsItem>
     </Tabs>
 </RadzenTabs>
+
+<RadzenChart>
+    @* <RadzenCategoryAxis>
+        <RadzenChartCategoryAxisLabel Text="Datum" />
+    </RadzenCategoryAxis>
+    <RadzenValueAxis>
+        <RadzenChartValueAxisLabel Text="Betrag" />
+    </RadzenValueAxis> *@
+    <RadzenLineSeries Data="@incomeData" CategoryProperty="Date" ValueProperty="Amount" Title="Einnahmen" />
+    <RadzenLineSeries Data="@expenseData" CategoryProperty="Date" ValueProperty="Amount" Title="Ausgaben" />
+</RadzenChart>

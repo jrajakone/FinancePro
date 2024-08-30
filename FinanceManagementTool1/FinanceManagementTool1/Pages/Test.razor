@@ -1,0 +1,70 @@
+﻿@page "/add-transaction"
+
+@using FinanceManagementTool1.Data
+@using FinanceManagementTool1.Models
+@inject ApplicationDbContext _context
+@inject NavigationManager Navigation
+
+<h3>Neue Transaktion hinzufügen</h3>
+
+<EditForm Model="@addData" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div>
+        <RadzenFormField Text="Datum">
+            <RadzenDatePicker @bind-Value=addData.Date Name="RadzenDatePickerBindValue" ShowCalendarWeek />
+        </RadzenFormField>
+    </div>
+
+    <div>
+        <RadzenFormField Text="Betrag">
+            <RadzenNumeric @bind-Value="addData.Amount" />
+        </RadzenFormField>
+    </div>
+
+    <div>
+        <RadzenFormField Text="Beschreibung">                                                                            
+            <RadzenTextBox @bind-Value="addData.Description" />
+        </RadzenFormField>
+    </div>
+
+    <div>
+        <RadzenFormField Text="Kategorie">
+            <RadzenTextBox @bind-Value="addData.Category" />
+        </RadzenFormField>
+    </div>
+
+    <div>
+        <RadzenButton ButtonType="ButtonType.Submit" Text="Speichern"></RadzenButton>
+    </div>
+
+</EditForm>
+
+
+
+@code {
+    private AddData addData = new AddData();
+
+    private async Task HandleValidSubmit()
+    {
+        if (_context != null)
+        {
+            _context.AddData.Add(addData);
+            await _context.SaveChangesAsync();
+        }
+        else
+        {
+            Console.WriteLine("_context ist null");
+        }
+
+        if (Navigation != null)
+        {
+            Navigation.NavigateTo("/dashboard");
+        }
+        else
+        {
+            Console.WriteLine("Navigation ist null");
+        }
+    }
+}
